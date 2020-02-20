@@ -22,11 +22,11 @@ public class Main
         System.out.println("Минимальное значение int: " + intMin);
         int intMax = Integer.MAX_VALUE;
         System.out.println("Максимальное значение int: " + intMax);
-        double doubleMin = Double.MIN_VALUE;
+        double doubleMin = - Double.MAX_VALUE;
         System.out.println("Минимальное значение double: " + doubleMin);
         double doubleMax = Double.MAX_VALUE;
         System.out.println("Максимальное значение double: " + doubleMax);
-        float floatMin = Float.MIN_VALUE;
+        float floatMin = - Float.MAX_VALUE;
         System.out.println("Минимальное значение float: " + floatMin);
         float floatMax = Float.MAX_VALUE;
         System.out.println("Максимальное значение float: " + floatMax);
