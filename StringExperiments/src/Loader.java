@@ -7,54 +7,39 @@ import java.util.Scanner;
 public class Loader
 {
     public static void main(String[] args) {
-        //задание 1 - вывести алфавит и символы букв алфавита
-        String alfabetEng = "abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ";
-        String alfabetRus = "абвгдеёжзийклмнопрстуфхцшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦШЩЪЫЬЭЮЯ";
-        // Вывод символов английского алфавита
-        for (int i = alfabetEng.indexOf('a'); i <= alfabetEng.indexOf('Z'); i++) {
-            char c = alfabetEng.charAt(i);
-            int code = (int) c;
-            System.out.printf(c + " = " + code + ", ");
-        }
-        // Вывод символов русского алфавита
-        for (int i = alfabetRus.indexOf('а'); i <= alfabetRus.indexOf('Я'); i++) {
-            char c = alfabetRus.charAt(i);
-            int code = (int) c;
-            System.out.printf(c + " = " + code + ", ");
-        }
-        System.out.println(); // пробел после первого задания
-        //задание 2 - посчитать зарплату Васи и Маши
+        //Домашняя работа 4.5
+        //задание 1 - посчитать зарплату Васи, Пети и Маши с помощью регулярных выражений
         String text = "Вася заработал 5000 рублей, Петя - 7563 рубля, а Маша - 30000 рублей";
         System.out.println(text);
-        int v1 = text.indexOf("Вася заработал");
-        int v2 = text.indexOf("руб");
-        String str1 = text.substring(v1 + 14, v2).trim();
-
-        int m1 = text.indexOf("Маша - ");
-        int m2 = text.lastIndexOf("руб");
-        String str2 = text.substring(m1 + 6, m2).trim();
-        int sum = Integer.parseInt(str1) + Integer.parseInt(str2);
+        int sum = 0;
+        String[] sumZP = text.split("\\,");
+        for(int i = 0; i < sumZP.length; i++){
+            String splitText = sumZP[i].replaceAll("[^0-9]","");
+            sum = sum + Integer.parseInt(splitText);
+        }
         System.out.println("Сумма заработка Васи и Маши равна: " + sum + " рублей");
+        //Задание 2 - Распечатать англоязычный текст по словам в консоли
+        String engText = "Of course there are people who love Java as a programming language. love the platform, love the community, but the language itself is in a very rough shape. I would prefer to start new projects in Kotlin instead of Java 100% of the time, and I am a strong advocate of Java 10 being the first Java to trade backward compatibility for a full scale overhaul of the language and especially its standard API. Yes, it is going to be just as rough or even rougher than the transition from Python 2 to Python 3, but it is long overdue.";
+        String[] splitEngText = engText.split(" ");
+        for(int i = 0; i < splitEngText.length; i++) {
+            System.out.println(splitEngText[i]);
+        }
         //Задание 3 - Ввод ФИО в консоль и вывод ФИО по строкам. Дополнительно - сделать программу устойчивой к сбоям.
         System.out.println("Введите фамилию имя и отчество:");
         Scanner scanner = new Scanner(System.in);
         String fio = scanner.nextLine();
-        int firstIndex = fio.indexOf(' ');
-        int lastIndex = fio.lastIndexOf(' ');
-        if (firstIndex == lastIndex){//сначала идет это условие т.к. при одном пробеле сразу выдается ошибка и перед присваиванием строк по индексам лучше сразу провести проверку
+        String[] splitFio = fio.split(" ");
+        if (splitFio.length != 3) {
             System.out.println("ФИО введенно неверно");
-            System.exit(0);//позволяет корректно завершать работу без ошибки
+            System.exit(0);//Для корректной работы программы
         }
-        String lastName = fio.substring(0, firstIndex);
-        String firstName = fio.substring(firstIndex + 1, lastIndex);
-        String middleName = fio.substring(lastIndex + 1);
-        int errorIndex1 = firstName.indexOf(' ');//лишние пробелы в случае неправильного ввода будут находится в районе имени - там и ищем
-       if (errorIndex1 > 0) {
-            System.out.println("ФИО введенно неверно");
-        } else {
-            System.out.println("Фамилия: " + lastName);
-            System.out.println("Имя: " + firstName);
-            System.out.println("Отчество: " + middleName);
+            System.out.println("Фамилия: " + splitFio[0]);
+            System.out.println("Имя: " + splitFio[1]);
+            System.out.println("Отчество: " + splitFio[2]);
+         //Задание 4 - Реализовать очистку номера телефона, вводимого из консоли, от лишних символов
+            System.out.println("Введите номер телефона:");
+            Scanner scannerTel = new Scanner(System.in);
+            String telNumber = scannerTel.nextLine();
+            System.out.println(telNumber.replaceAll("[^0-9]",""));
         }
-    }
 }
